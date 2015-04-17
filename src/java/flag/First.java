@@ -8,6 +8,12 @@ package flag;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,25 +43,27 @@ public class First extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("inside first");
         response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter out = response.getWriter();
-//        String uname = request.getParameter("uname");
-//        String pass = request.getParameter("pass");
-//        try{
-//            if(uname.equalsIgnoreCase("admin")&&pass.equalsIgnoreCase("admin")){
-//                
-//                HttpSession session = request.getSession();
-//                session.setAttribute("user", uname);
-//                RequestDispatcher rd = request.getRequestDispatcher("Second");
-//                rd.forward(request, response);
-//            }else{
-//                RequestDispatcher rd = request.getRequestDispatcher("index.html");
-//                rd.include(request, response);
-//            
-//            }
-//        } finally {
-//            out.close();
-//        }   
+        PrintWriter out = response.getWriter();
+        String uname = request.getParameter("uname");
+        String pass = request.getParameter("pass");
+        try{
+            if(uname.equalsIgnoreCase("admin")&&pass.equalsIgnoreCase("admin")){
+                
+                HttpSession session = request.getSession();
+                session.setAttribute("user", uname);
+                RequestDispatcher rd = request.getRequestDispatcher("Second");
+                rd.forward(request, response);
+            }else{
+                RequestDispatcher rd = request.getRequestDispatcher("index.html");
+                rd.include(request, response);
+            
+            }
+        } finally {
+            out.close();
+        }
+        
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
