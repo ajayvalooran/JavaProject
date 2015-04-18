@@ -10,6 +10,9 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="http://code.jquery.com/jquery.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <style>
             @import url(http://fonts.googleapis.com/css?family=Exo:100,200,400);
             @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:700,400,300);
@@ -163,6 +166,11 @@ and open the template in the editor.
 
                 });
 
+                $("#highScore").click(function() {
+                    $("#score").text("kooi");
+                    $("#dialog").dialog();
+                });
+
             });
         </script>
     </head>
@@ -180,9 +188,12 @@ and open the template in the editor.
             <form action="Profile" method="get">
 
                 <input type="button" id="startGame" name= "action" value="StartGame"> <br><br>
-                <input type="submit" id="highScore" name= "action" value="HighScore">  <br><br>
+                <input type="button" id="highScore" name= "action" value="HighScore">  <br><br>
                 <input type="submit" id="changePassword" name= "action" value="ChangePassword">
             </form>
+            <div id="dialog" title="Basic dialog">
+                <p id="score"></p>
+            </div>
         </div>
 
 

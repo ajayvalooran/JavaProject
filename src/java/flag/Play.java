@@ -48,7 +48,7 @@ public class Play {
     private JsonObject getName(Integer get) {
          System.out.println("getName");
         JsonObject play = null;
-        String query = "select * from flag where id =" + get;
+        String query = "select * from flag where id =" + get + "and picked = 'N'" ;
         try (Connection conn = Credentials.getConnection()) {
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
