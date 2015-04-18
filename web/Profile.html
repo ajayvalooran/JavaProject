@@ -174,6 +174,13 @@ and open the template in the editor.
                    
                     $("#dialog").dialog();
                 });
+                
+                $("#signOut").click(function() {
+                    console.log('inside game click');
+                    window.location.href = "./index.html";
+
+                });
+                
 
             });
         </script>
@@ -193,6 +200,7 @@ and open the template in the editor.
 
                 <input type="button" id="startGame" name= "action" value="StartGame"> <br><br>
                 <input type="button" id="highScore" name= "action" value="HighScore">  <br><br>
+                <input type="button" id="signOut" name= "action" value="SignOut">  <br><br>
                 
             </form>
             <div id="dialog" title="Basic dialog">
