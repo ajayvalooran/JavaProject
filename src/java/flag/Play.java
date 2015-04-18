@@ -34,7 +34,7 @@ public class Play {
     public int randomGen() {
         System.out.println("Random Gen");
         Random randomGenerator = new Random();
-        return randomGenerator.nextInt(10);
+        return randomGenerator.nextInt(7);
     }
 
     public String falgGen() {

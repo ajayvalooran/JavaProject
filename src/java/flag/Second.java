@@ -35,7 +35,7 @@ public class Second extends HttpServlet {
         System.out.println("inside second");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession(false);
+       HttpSession session = request.getSession(false);
         try {
             if (session != null) {
                 //out.print("<h4>Welcome "+session.getAttribute("user"));
