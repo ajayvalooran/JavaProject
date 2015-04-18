@@ -167,7 +167,11 @@ and open the template in the editor.
                 });
 
                 $("#highScore").click(function() {
-                    $("#score").text("kooi");
+                    $.get('./play/high', function(data) {
+                         $("#score").text("Highest Score: " +data);
+                        //alert("Load was performed.");
+                    });
+                   
                     $("#dialog").dialog();
                 });
 
@@ -189,7 +193,7 @@ and open the template in the editor.
 
                 <input type="button" id="startGame" name= "action" value="StartGame"> <br><br>
                 <input type="button" id="highScore" name= "action" value="HighScore">  <br><br>
-                <input type="submit" id="changePassword" name= "action" value="ChangePassword">
+                
             </form>
             <div id="dialog" title="Basic dialog">
                 <p id="score"></p>

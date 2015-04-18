@@ -5,6 +5,7 @@
  */
 var answer = "";
 var score = 0;
+var stage = 0;
 
 function store(option) {
     answer = option;
@@ -13,36 +14,101 @@ function store(option) {
 
 function check(option) {
     if (option === answer) {
-        console.log("Correct answer");
-        //window.alert("Correct answer");
-        score = score + 1;
-        console.log(score + " :user score");
-        if (sessionStorage.getItem("userScore") === 0 || sessionStorage.getItem("userScore") === null) {
-            console.log("inside session null");
-            sessionStorage.setItem("userScore", 1);
+
+        if (parseInt(sessionStorage.getItem("userScore")) < 5 || sessionStorage.getItem("stage") === null) {
+            console.log("Correct answer");
+            //window.alert("Correct answer");
+            score = score + 1;
+            console.log(score + " :user score");
+            if (sessionStorage.getItem("userScore") === 0 || sessionStorage.getItem("userScore") === null) {
+                console.log("inside session null");
+                sessionStorage.setItem("userScore", 1);
+                sessionStorage.setItem("stage", 1);
+            }
+            else {
+                console.log("inside else");
+                score = sessionStorage.getItem("userScore");
+                score = parseInt(score) + 1;
+                sessionStorage.setItem("userScore", score);
+                stage = sessionStorage.getItem("stage");
+                stage = parseInt(stage) + 1;
+                sessionStorage.setItem("stage", stage);
+            }
+            location.reload();
         }
         else {
-            console.log("inside else");
-            score = sessionStorage.getItem("userScore");
-            score = parseInt(score) + 1;
-            sessionStorage.setItem("userScore", score);
+            var high = 0;
+            $.get('./play/high', function(data) {
+                high = parseInt(data);
+
+            });
+            if (high < parseInt(sessionStorage.getItem("userScore"))) {
+                //var data = parseInt(sessionStorage.setItem("userScore"));
+                console.log("Score" + sessionStorage.getItem("userScore"));
+                $.ajax({
+                    url: "./play/high",
+                    dataType: "json",
+                    contentType: 'application/json; charset=UTF-8',
+                    data: JSON.stringify({"score": parseInt(sessionStorage.getItem("userScore"))}),
+                    method: "post",
+                    success: true
+                });
+
+            }
+
+            var option = prompt("You Won the Game! Like to play another game? yes/no");
+
+            if (option === "yes") {
+                sessionStorage.setItem("stage", 1);
+                sessionStorage.setItem("userScore", 0)
+                location.reload();
+            }
+            else {
+                sessionStorage.setItem("stage", 1);
+                sessionStorage.setItem("userScore", 0)
+                window.location.href = "./Profile.html";
+            }
         }
 
-        location.reload();
+
     }
     else {
         console.log("Wrong anser");
-        window.alert("Wrong answer");
+        //window.alert("Wrong answer");
+        var high = 0;
+
+        $.get('./play/high', function(data) {
+            high = parseInt(data);
+
+        });
+        if (high < parseInt(sessionStorage.getItem("userScore"))) {
+            //var data = parseInt(sessionStorage.setItem("userScore"));
+            console.log("Score" + sessionStorage.getItem("userScore"));
+            $.ajax({
+                url: "./play/high",
+                dataType: "json",
+                contentType: 'application/json; charset=UTF-8',
+                data: JSON.stringify({"score": parseInt(sessionStorage.getItem("userScore"))}),
+                method: "post",
+                success: true
+            });
+
+        }
+
+
+
         sessionStorage.setItem("userScore", 0);
         var option = prompt("Game Over! Like to play another game? yes/no");
 
         if (option === "yes") {
+            sessionStorage.setItem("stage", 1);
             location.reload();
         }
-        else{
+        else {
+            sessionStorage.setItem("stage", 1);
             window.location.href = "./Profile.html";
         }
-        
+
 
     }
 }

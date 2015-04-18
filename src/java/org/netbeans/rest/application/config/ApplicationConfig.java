@@ -33,6 +33,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(flag.First.class);
         resources.add(flag.Play.class);
+        resources.add(flag.highscore.class);
     }
     
 }
