@@ -15,7 +15,7 @@ function store(option) {
 function check(option) {
     if (option === answer) {
 
-        if (parseInt(sessionStorage.getItem("userScore")) < 5 || sessionStorage.getItem("stage") === null) {
+        if (parseInt(sessionStorage.getItem("userScore")) < 10 || sessionStorage.getItem("stage") === null) {
             console.log("Correct answer");
             //window.alert("Correct answer");
             score = score + 1;
